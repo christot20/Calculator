@@ -337,14 +337,114 @@
 
 // //newer code
 
+const othopBttn = document.querySelectorAll(".otherOperations");
+othopBttn.forEach(bttn => bttn.addEventListener("click", advOps)); 
+
 const operBttn = document.querySelectorAll(".operatorButtons");
 operBttn.forEach(bttn => bttn.addEventListener("click", ops)); 
 
-const eq = document.querySelector("#eq");
-eq.addEventListener("click", operate)
+//move adv ops to call ops instead and write them there, u moved the eq sign to ops here
 
 const numBttn = document.querySelectorAll(".numberButtons");
 numBttn.forEach(bttn => bttn.addEventListener("click", nums)); 
+
+const clear = document.querySelector("#clear");
+clear.addEventListener("click", clearAll); 
+
+const delBttn = document.querySelector("#delete");
+delBttn.addEventListener("click", clearOne); 
+
+const displayedAnswer = document.getElementById("answer");
+
+// const buttons = document.querySelectorAll("button")
+// buttons.forEach(bttn => bttn.addEventListener("click", displayedNumber)); 
+
+displayedAnswer.textContent = 0;
+function displayedNumber(){
+    console.log("sus")
+    if (queue.length === 0){
+        displayedAnswer.textContent = 0
+    }
+    else if ((queue.length === 2 && displayValue2 === "") || (queue.length === 1)){
+        displayedAnswer.textContent = queue[0]
+    }
+    else{
+        displayedAnswer.textContent = queue[1]
+    }
+}
+
+function clearAll(e){
+    console.log(e)
+    operators = ""
+    displayValue = ""
+    displayValue2 = ""
+    queue = []
+    console.log(queue)
+    return displayedNumber()
+}
+function clearOne(e){
+    if (queue.length === 2 && displayValue2 === ""){
+        console.log(e)
+        x = queue[0].toString()
+        y = x.slice(0, x.length - 1);
+        queue.splice(0,1,y)
+        console.log(queue[0])
+        console.log(queue)
+        return displayedNumber()
+    }
+    else if(queue.length === 1){
+        console.log(e)
+        x = queue[0].toString()
+        y = x.slice(0, x.length - 1);
+        queue.splice(0,1,y)
+        return displayedNumber()
+    }
+    else if (displayValue2 !== ""){
+        console.log(e)
+        x = queue[1].toString()
+        y = x.slice(0, x.length - 1);
+        queue.splice(1,1,y)
+        console.log(queue)
+        return displayedNumber()
+    }
+}
+//python thing print(chr(hex(77))) to do conversion from hex to english!@!@!@!@!@!@
+
+function advOps(e){
+    // //console.log(e)
+    // if (e.target.textContent === "x^y"){
+    //     console.log(e)
+    //     if (queue.length === 2 && displayValue2 !== ""){
+    //         queue[1] = Math.pow(queue[1], displayValue2)
+    //     }
+    //     // else{
+
+    //     // }
+    // }
+    if (e.target.textContent === "+/-"){
+        console.log(queue)
+        console.log(e)
+        if (queue.length === 2 && displayValue2 === ""){
+            queue.pop()
+            powerVal = parseFloat(queue[0]*(-1))
+            //queue.shift()
+            console.log(queue)
+            return queue[0]*(-2)
+        }
+        else{
+
+        }
+    }
+    // else if (e.target.textContent === "x!"){
+    //     console.log(e)
+    //     if (queue.length === 2 && displayValue2 !== ""){
+
+    //     }
+    //     else{
+
+    //     }
+    // }
+}
 
 function addition(){
     newdisplayValue = parseFloat(queue[0])+parseFloat(queue[1])
@@ -379,19 +479,29 @@ function divide(){
 function operate(){
     if (operators === "+"){
         console.log(addition())
-        return addition()
+        addition()
+        queue.splice(-1,1)
+        queue.push(displayValue2)
+        console.log(queue)
+        return displayedNumber()
     }
     else if (operators === "-"){
         console.log(subtraction())
-        return subtraction()
+        subtraction()
+        queue.splice(-1,1)
+        return displayedNumber()
     }
     else if (operators === "*"){
         console.log(multiply())
-        return multiply()
+        multiply()
+        queue.splice(-1,1)
+        return displayedNumber()
     }
     else if (operators === "/"){
         console.log(divide())
-        return divide()
+        divide()
+        queue.splice(-1,1)
+        return displayedNumber()
     }
 }
 
@@ -404,9 +514,6 @@ function ops(e){
             operate()
             operators = "+"
             return operators
-            // operate()
-            // operators = "-"
-            // return (operate())
         }
         else{
             return operators = "+"
@@ -442,6 +549,21 @@ function ops(e){
             return operators = "/"
         }
     }
+    else if (e.target.textContent === "="){
+        if (displayValue2 === "" || queue.length < 2){
+            if (displayValue === ""){
+                console.log(0)
+                return 0
+            }
+            else{
+                console.log(parseFloat(queue[0]))
+                return parseFloat(queue[0])
+            }
+        }
+        else{
+            operate()
+        }
+    }
 }
 
 
@@ -461,6 +583,7 @@ function nums(e){
         }
         queue.push(displayValue2)
         console.log(queue)
+        displayedNumber()
     }
     else{
         displayValue += x
@@ -470,15 +593,15 @@ function nums(e){
             queue.shift();
         }
         console.log(queue)
+        displayedNumber()
     }
 }
 
+//make it so that the actual number is displayed (first number of array)
+//add other operations (put operation on number and put number in next line and delete number before it)
+//make it so decimal points are rounded out and can only support to a limit
+//make it so e05 blah blah numbers are added
+//find a way to stop zeros from being used if 0 is already there 
+//(either check somehow if there is a zero in front of other stuff or use the fact that answer display = 0 as a conditional that 0 cant be used and delete it or stop it from being pressed)
 
-// const othopBttn = document.querySelectorAll(".otherOperations");
-// othopBttn.forEach(bttn => bttn.addEventListener("click", advOps)); 
 
-// const clearBttn = document.querySelectorAll("#clear");
-// clearBttn.addEventListener("click", clearAll); 
-
-// const delBttn = document.querySelectorAll("#delete");
-// delBttn.addEventListener("click", clearOne); 
