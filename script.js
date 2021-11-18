@@ -355,6 +355,9 @@ const delBttn = document.querySelector("#delete");
 delBttn.addEventListener("click", clearOne); 
 
 const displayedAnswer = document.getElementById("answer");
+const decimal = document.getElementById("deci");
+
+
 
 // const buttons = document.querySelectorAll("button")
 // buttons.forEach(bttn => bttn.addEventListener("click", displayedNumber)); 
@@ -382,7 +385,17 @@ function clearAll(e){
     console.log(queue)
     return displayedNumber()
 }
-function clearOne(e){
+function clearOne(e){       
+    if(displayValue2.length !== 15){
+        console.log("yo")
+        decimal.removeEventListener("click", nums);
+        decimal.addEventListener("click", nums);
+    }
+    if(displayValue.length !== 15){
+        console.log("yo")
+        decimal.removeEventListener("click", nums);
+        decimal.addEventListener("click", nums);
+    }
     if (queue.length === 2 && displayValue2 === ""){
         console.log(e)
         x = queue[0].toString()
@@ -393,21 +406,33 @@ function clearOne(e){
         return displayedNumber()
     }
     else if(queue.length === 1){
+        if (displayValue.length >= 15){
+            numBttn.forEach(bttn => bttn.addEventListener("click", nums)); 
+            //decimal.addEventListener("click", nums)
+            console.log("hi")
+        }
         console.log(e)
-        x = queue[0].toString()
-        y = x.slice(0, x.length - 1);
-        queue.splice(0,1,y)
+        displayValue.toString()
+        displayValue = displayValue.slice(0, displayValue.length - 1);
+        queue.splice(0,1,displayValue)
+        console.log(queue)
         return displayedNumber()
     }
     else if (displayValue2 !== ""){
+        if (displayValue2.length >= 15){
+            numBttn.forEach(bttn => bttn.addEventListener("click", nums)); 
+            //decimal.addEventListener("click", nums)
+            console.log("hi")
+        }
         console.log(e)
-        x = queue[1].toString()
-        y = x.slice(0, x.length - 1);
-        queue.splice(1,1,y)
+        displayValue2.toString()
+        displayValue2 = displayValue2.slice(0, displayValue2.length - 1);
+        queue.splice(1,1,displayValue2)
         console.log(queue)
         return displayedNumber()
     }
 }
+
 //python thing print(chr(hex(77))) to do conversion from hex to english!@!@!@!@!@!@
 
 function advOps(e){
@@ -448,14 +473,14 @@ function advOps(e){
 
 function addition(){
     newdisplayValue = parseFloat(queue[0])+parseFloat(queue[1])
-    queue.push(newdisplayValue)
+    queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
     displayValue2 = ""
     return newdisplayValue
 }
 function subtraction(){
     newdisplayValue = parseFloat(queue[0])-parseFloat(queue[1])
-    queue.push(newdisplayValue)
+    queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
     displayValue2 = ""
     return newdisplayValue
@@ -463,7 +488,7 @@ function subtraction(){
   
 function multiply(){
     newdisplayValue = parseFloat(queue[0])*parseFloat(queue[1])
-    queue.push(newdisplayValue)
+    queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
     displayValue2 = ""
     return newdisplayValue
@@ -471,7 +496,7 @@ function multiply(){
   
 function divide(){
     newdisplayValue = parseFloat(queue[0])/parseFloat(queue[1])
-    queue.push(newdisplayValue)
+    queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
     displayValue2 = ""
     return newdisplayValue
@@ -507,8 +532,22 @@ function operate(){
 
 operators = ""
 function ops(e){
+    decimal.addEventListener("click", nums)
     console.log(e)
     console.log(e.target.textContent)
+    if (queue.length === 1){
+        console.log("shoosh")
+        displayValue = Number(queue[0])
+        queue.shift()
+        queue.push(displayValue)
+    }
+    else if(queue.length === 2){
+        displayValue2 = Number(queue[1])
+        queue.splice(-1,1);
+        queue.push(displayValue2)
+    }
+    
+    displayedNumber()
     if (e.target.textContent === "+"){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
@@ -571,22 +610,77 @@ function ops(e){
 //have the click give you the operator BUT ONLY CALL IT ON THE EQUALS SIGN CLICK
 queue = []
 displayValue = ""
-displayValue2 = ""
+displayValue2 = "" 
+//add limit to how long input is, have large numbers be in scientfic notation
+//have 0 not be allowed as first number
+decimal.addEventListener("click", nums)
+
 function nums(e){
+    decimal.addEventListener("click", nums)
     console.log(e);
     let x = e.target.textContent;
+    console.log(x)
     if (operators !== ""){
+        for (i = 0; i < displayValue2.length; i++){
+            if(displayValue2.length === 15){
+                numBttn.forEach(bttn => bttn.removeEventListener("click", nums)); 
+                decimal.removeEventListener("click", nums);
+            }
+        }
+        console.log("h")
+        // decimal.addEventListener("click", nums)
+        // if (x !== "." && displayValue2 === ""){
+        //     displayValue2 = ""
+        // }
         displayValue2 += x
+        console.log(displayValue2)
+        // if (x === "0" && queue.length === 2 && displayValue2 === "00"){
+        //     console.log("swaos")
+        //     displayValue2 = "0" 
+        // }
+        // else if(x === "0" && queue.length === 1){
+        //     displayValue2 = "0"
+        // }
+        // else{                                                       add decimal remover, scientific notation answers, and string limits for number inputs
+        //     displayValue2 += x 
+        // }
+        if (displayValue2.includes(".")){
+            decimal.removeEventListener("click", nums)
+        }
         console.log(displayValue2)
         if (queue.length === 2){
             queue.splice(-1,1);
         }
         queue.push(displayValue2)
         console.log(queue)
+        //decimal.addEventListener("click", nums)
         displayedNumber()
     }
     else{
+        // if (x !== "." && displayValue === "0"){
+        //     displayValue = ""
+        // }
+        for (i = 0; i < displayValue.length; i++){
+            if(displayValue.length === 15){
+                numBttn.forEach(bttn => bttn.removeEventListener("click", nums)); 
+                decimal.removeEventListener("click", nums);
+            }
+        }
         displayValue += x
+        // if (x === "0" && queue.length === 0){
+        //     console.log("swaos")
+        //     displayValue = "0" 
+        // }
+        // else if(x === "0" && displayValue === "00"){
+        //     console.log("hhqhwqh")
+        //     displayValue = "0" 
+        // }
+        // else{
+        //     displayValue += x
+        // }
+        if (displayValue.includes(".")){
+            decimal.removeEventListener("click", nums)
+        }
         console.log(displayValue)
         queue.push(displayValue)
         if (queue.length > 1){
