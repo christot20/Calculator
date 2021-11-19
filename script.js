@@ -357,6 +357,29 @@ delBttn.addEventListener("click", clearOne);
 const displayedAnswer = document.getElementById("answer");
 const decimal = document.getElementById("deci");
 
+const keyd = document.addEventListener('keydown', function(event) {
+    if(event.key === "Escape") {
+        clearAll();
+    }
+    else if(event.key === "Backspace") {
+        clearOne();
+    }
+    else if(event.key === "=") {
+        operate();
+    }
+    else if((event.key === "/") || (event.key === "+") || (event.key === "-") || (event.key === "*")) {
+        console.log("gi")
+        j = event.key
+        ops();
+    }
+    else if((event.key === "1") || (event.key === "2") || (event.key === "3") || (event.key === "4") || 
+    (event.key === "5") || (event.key === "6") || (event.key === "7") || (event.key === "8") || 
+    (event.key === "9")) {
+        console.log("gi")
+        n = event.key
+        nums();
+    }
+});
 
 
 // const buttons = document.querySelectorAll("button")
@@ -367,6 +390,10 @@ function displayedNumber(){
     console.log("sus")
     if (queue.length === 0){
         displayedAnswer.textContent = 0
+        // if (divide() === "No >:)"){
+        //     console.log("fgjfjgjfjfg")
+        //     displayedAnswer.textContent = "No >:)"
+        // }
     }
     else if ((queue.length === 2 && displayValue2 === "") || (queue.length === 1)){
         displayedAnswer.textContent = queue[0]
@@ -396,16 +423,16 @@ function clearOne(e){
         decimal.removeEventListener("click", nums);
         decimal.addEventListener("click", nums);
     }
-    if (queue.length === 2 && displayValue2 === ""){
-        console.log(e)
-        x = queue[0].toString()
-        y = x.slice(0, x.length - 1);
-        queue.splice(0,1,y)
-        console.log(queue[0])
-        console.log(queue)
-        return displayedNumber()
-    }
-    else if(queue.length === 1){
+    // if (queue.length === 2 && displayValue2 === ""){
+    //     console.log(e)
+    //     x = queue[0].toString()
+    //     y = x.slice(0, x.length - 1);
+    //     queue.splice(0,1,y)
+    //     console.log(queue[0])
+    //     console.log(queue)
+    //     return displayedNumber()
+    // }
+    if(queue.length === 1){
         if (displayValue.length >= 15){
             numBttn.forEach(bttn => bttn.addEventListener("click", nums)); 
             //decimal.addEventListener("click", nums)
@@ -495,6 +522,12 @@ function multiply(){
 }
   
 function divide(){
+    if (queue[1] === 0 || queue[1] === "0"){
+        queue = []
+        // displayedAnswer.textContent = "No >:)";
+        // console.log(displayedAnswer.textContent)
+        // return displayedAnswer.textContent
+    }
     newdisplayValue = parseFloat(queue[0])/parseFloat(queue[1])
     queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
@@ -534,7 +567,21 @@ operators = ""
 function ops(e){
     decimal.addEventListener("click", nums)
     console.log(e)
-    console.log(e.target.textContent)
+    //console.log(j)
+    //console.log(typeof e.target.textContent)
+    if (typeof e !== "undefined" || typeof j === "undefined"){
+        console.log("fhhhghgh")
+        typeof j === "undefined"
+        y = e.target.textContent
+    }
+    else if(typeof j !== "undefined" || typeof e === "undefined"){ //find a way to get j back to undefined
+        typeof e === "undefined"                          //the keys vertake the buttons when clicked
+        y = j                                             // fix it for the numbers and operators
+    }
+    // else{
+    //     y = j
+    // }
+    console.log(y)
     if (queue.length === 1){
         console.log("shoosh")
         displayValue = Number(queue[0])
@@ -548,7 +595,7 @@ function ops(e){
     }
     
     displayedNumber()
-    if (e.target.textContent === "+"){
+    if (y === "+"){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
             operators = "+"
@@ -558,7 +605,7 @@ function ops(e){
             return operators = "+"
         }
     }
-    else if (e.target.textContent === "-"){
+    else if (y === "-"){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
             operators = "-"
@@ -568,7 +615,7 @@ function ops(e){
             return operators = "-"
         }
     }
-    else if (e.target.textContent === "*"){
+    else if (y === "*"){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
             operators = "*"
@@ -578,7 +625,7 @@ function ops(e){
             return operators = "*"
         }
     }
-    else if (e.target.textContent === "/"){
+    else if (y === "/"){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
             operators = "/"
@@ -588,7 +635,7 @@ function ops(e){
             return operators = "/"
         }
     }
-    else if (e.target.textContent === "="){
+    else if (y === "="){
         if (displayValue2 === "" || queue.length < 2){
             if (displayValue === ""){
                 console.log(0)
@@ -613,12 +660,36 @@ displayValue = ""
 displayValue2 = "" 
 //add limit to how long input is, have large numbers be in scientfic notation
 //have 0 not be allowed as first number
+
+//fimd way to have eventlistnerr exist before nums, leave when its called, come bck on operate function, etc
 decimal.addEventListener("click", nums)
+document.addEventListener('keydown', function(event) { 
+    if(event.key === ".") {
+        n = event.key
+        nums();
+    }
+});
+document.addEventListener('keydown', function(event) { 
+    if(event.key === "0") {
+        n = event.key
+        nums();
+    }
+});
 
 function nums(e){
+    if (typeof e !== "undefined" || typeof n === "undefined"){
+        console.log("fhhhghgh")
+        typeof n === "undefined"
+        x = e.target.textContent
+    }
+    else if(typeof n !== "undefined" || typeof e === "undefined"){ //find a way to get j back to undefined
+        typeof e === "undefined"                          //the keys vertake the buttons when clicked
+        x = n                                           // fix it for the numbers and operators
+    }
     decimal.addEventListener("click", nums)
+    
     console.log(e);
-    let x = e.target.textContent;
+    //let x = e.target.textContent;
     console.log(x)
     if (operators !== ""){
         for (i = 0; i < displayValue2.length; i++){
@@ -644,8 +715,15 @@ function nums(e){
         // else{                                                       add decimal remover, scientific notation answers, and string limits for number inputs
         //     displayValue2 += x 
         // }
-        if (displayValue2.includes(".")){
-            decimal.removeEventListener("click", nums)
+        if (displayValue2.includes("..")){
+            console.log("swoos")
+            displayValue2 = displayValue2.substring(0, displayValue2.length - 1);
+        }
+        else if (displayValue2.includes("00")){
+            if(displayValue2. indexOf(".") === -1){
+                console.log("swoos")
+                displayValue2 = displayValue2.substring(0, displayValue2.length - 1);
+            }
         }
         console.log(displayValue2)
         if (queue.length === 2){
@@ -678,8 +756,15 @@ function nums(e){
         // else{
         //     displayValue += x
         // }
-        if (displayValue.includes(".")){
-            decimal.removeEventListener("click", nums)
+        if (displayValue.includes("..")){
+            console.log("swoos")
+            displayValue = displayValue.substring(0, displayValue.length - 1);
+        }
+        else if (displayValue.includes("00")){
+            if(displayValue. indexOf(".") === -1){
+                console.log("swoos")
+                displayValue = displayValue.substring(0, displayValue.length - 1);
+            }
         }
         console.log(displayValue)
         queue.push(displayValue)
