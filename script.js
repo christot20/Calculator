@@ -462,6 +462,7 @@ function clearOne(e){
 
 //python thing print(chr(hex(77))) to do conversion from hex to english!@!@!@!@!@!@
 
+//now just see if u can add any extra features
 function advOps(e){
     // //console.log(e)
     // if (e.target.textContent === "x^y"){
@@ -692,10 +693,16 @@ function nums(e){
     //let x = e.target.textContent;
     console.log(x)
     if (operators !== ""){
+        if (displayValue2.includes(".")){
+            if (x === "."){
+                x = ""
+            }
+        }
         for (i = 0; i < displayValue2.length; i++){
-            if(displayValue2.length === 15){
+            if(displayValue2.length === 15){   //try removing the items like how u did for 0 and .
                 numBttn.forEach(bttn => bttn.removeEventListener("click", nums)); 
                 decimal.removeEventListener("click", nums);
+                displayValue2 = displayValue2.substring(0, displayValue2.length - 1);
             }
         }
         console.log("h")
@@ -720,10 +727,17 @@ function nums(e){
             displayValue2 = displayValue2.substring(0, displayValue2.length - 1);
         }
         else if (displayValue2.includes("00")){
-            if(displayValue2. indexOf(".") === -1){
+            if((displayValue2. indexOf(".") === -1) && (displayValue2. indexOf("0") === 0)){
                 console.log("swoos")
                 displayValue2 = displayValue2.substring(0, displayValue2.length - 1);
             }
+        }
+        else if ((displayValue2.indexOf("0") === 0) && ((displayValue2.indexOf("1") === 1) || 
+        (displayValue2.indexOf("2") === 1) || (displayValue2.indexOf("3") === 1) || (displayValue2.indexOf("4") === 1)
+        || (displayValue2.indexOf("5") === 1) || (displayValue2.indexOf("6") === 1) || (displayValue2.indexOf("7") === 1)
+        || (displayValue2.indexOf("8") === 1) || (displayValue2.indexOf("9") === 1))){
+            //delete the first value so zero is gone and then work on limoting how mnay #s
+            displayValue2 = displayValue2.substring(1);
         }
         console.log(displayValue2)
         if (queue.length === 2){
@@ -738,10 +752,16 @@ function nums(e){
         // if (x !== "." && displayValue === "0"){
         //     displayValue = ""
         // }
+        if (displayValue.includes(".")){
+            if (x === "."){
+                x = ""
+            }
+        }
         for (i = 0; i < displayValue.length; i++){
             if(displayValue.length === 15){
                 numBttn.forEach(bttn => bttn.removeEventListener("click", nums)); 
                 decimal.removeEventListener("click", nums);
+                displayValue = displayValue.substring(0, displayValue.length - 1);
             }
         }
         displayValue += x
@@ -761,10 +781,17 @@ function nums(e){
             displayValue = displayValue.substring(0, displayValue.length - 1);
         }
         else if (displayValue.includes("00")){
-            if(displayValue. indexOf(".") === -1){
+            if((displayValue. indexOf(".") === -1) && (displayValue. indexOf("0") === 0)){
                 console.log("swoos")
                 displayValue = displayValue.substring(0, displayValue.length - 1);
             }
+        }
+        else if ((displayValue.indexOf("0") === 0) && ((displayValue.indexOf("1") === 1) || 
+        (displayValue.indexOf("2") === 1) || (displayValue.indexOf("3") === 1) || (displayValue.indexOf("4") === 1)
+        || (displayValue.indexOf("5") === 1) || (displayValue.indexOf("6") === 1) || (displayValue.indexOf("7") === 1)
+        || (displayValue.indexOf("8") === 1) || (displayValue.indexOf("9") === 1))){
+            //delete the first value so zero is gone and then work on limoting how mnay #s
+            displayValue = displayValue.substring(1);
         }
         console.log(displayValue)
         queue.push(displayValue)
