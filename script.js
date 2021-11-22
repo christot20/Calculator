@@ -504,6 +504,8 @@ function addition(){
     queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
     displayValue2 = ""
+    //queue.splice(-1,1)
+    //operators = ""
     return newdisplayValue
 }
 function subtraction(){
@@ -511,6 +513,8 @@ function subtraction(){
     queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
     displayValue2 = ""
+    //queue.splice(-1,1)
+    //operators = ""
     return newdisplayValue
 }
   
@@ -519,6 +523,8 @@ function multiply(){
     queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
     displayValue2 = ""
+    //queue.splice(-1,1)
+    //operators = ""
     return newdisplayValue
 }
   
@@ -533,6 +539,8 @@ function divide(){
     queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
     displayValue2 = ""
+    //queue.splice(-1,1)
+    //operators = ""
     return newdisplayValue
 }
 function operate(){
@@ -540,26 +548,33 @@ function operate(){
         console.log(addition())
         addition()
         queue.splice(-1,1)
-        queue.push(displayValue2)
+        // queue.push(displayValue2)
         console.log(queue)
+        operators = "new"
         return displayedNumber()
     }
     else if (operators === "-"){
         console.log(subtraction())
         subtraction()
         queue.splice(-1,1)
+        console.log(queue)
+        operators = "new"
         return displayedNumber()
     }
     else if (operators === "*"){
         console.log(multiply())
         multiply()
         queue.splice(-1,1)
+        console.log(queue)
+        operators = "new"
         return displayedNumber()
     }
     else if (operators === "/"){
         console.log(divide())
         divide()
         queue.splice(-1,1)
+        console.log(queue)
+        operators = "new"
         return displayedNumber()
     }
 }
@@ -678,6 +693,14 @@ document.addEventListener('keydown', function(event) {
 });
 
 function nums(e){
+    if (operators === "new" && queue.length === 1){
+        console.log(queue)
+        queue = []
+        console.log(queue)
+        displayValue = ""
+        displayValue2 = ""
+        operators = ""
+    }
     if (typeof e !== "undefined" || typeof n === "undefined"){
         console.log("fhhhghgh")
         typeof n === "undefined"
@@ -809,5 +832,3 @@ function nums(e){
 //make it so e05 blah blah numbers are added
 //find a way to stop zeros from being used if 0 is already there 
 //(either check somehow if there is a zero in front of other stuff or use the fact that answer display = 0 as a conditional that 0 cant be used and delete it or stop it from being pressed)
-
-
