@@ -385,11 +385,16 @@ const keyd = document.addEventListener('keydown', function(event) {
 // const buttons = document.querySelectorAll("button")
 // buttons.forEach(bttn => bttn.addEventListener("click", displayedNumber)); 
 
-displayedAnswer.textContent = 0;
+displayedAnswer.textContent = ""; //i removed the thing to auto change divison by zero to clear the
+//array in the division function and made the test content blank 
+//cuz it wasnt actually 0, see a work around and have a span over
+//the answer display that shows the operation when operators !== new or "", see if u can do something
+//about pressing equals when there isnt a second number too
+//fix the + = thing so that it returns first nuber in array
 function displayedNumber(){
     console.log("sus")
     if (queue.length === 0){
-        displayedAnswer.textContent = 0
+        displayedAnswer.textContent = ""
         // if (divide() === "No >:)"){
         //     console.log("fgjfjgjfjfg")
         //     displayedAnswer.textContent = "No >:)"
@@ -529,12 +534,12 @@ function multiply(){
 }
   
 function divide(){
-    if (queue[1] === 0 || queue[1] === "0"){
-        queue = []
-        // displayedAnswer.textContent = "No >:)";
-        // console.log(displayedAnswer.textContent)
-        // return displayedAnswer.textContent
-    }
+    // if (queue[1] === 0 || queue[1] === "0"){
+    //     queue = []
+    //     // displayedAnswer.textContent = "No >:)";
+    //     // console.log(displayedAnswer.textContent)
+    //     // return displayedAnswer.textContent
+    // }
     newdisplayValue = parseFloat(queue[0])/parseFloat(queue[1])
     queue.push(Math.round(1000*newdisplayValue)/1000)
     queue.shift()
@@ -545,37 +550,62 @@ function divide(){
 }
 function operate(){
     if (operators === "+"){
-        console.log(addition())
-        addition()
-        queue.splice(-1,1)
-        // queue.push(displayValue2)
         console.log(queue)
-        operators = "new"
-        return displayedNumber()
+        if (queue.length === 1 || (queue.length === 2 && queue[1] === "")){
+            newdisplayValue = queue[0]
+            return displayedNumber
+        }
+        else{
+            console.log(addition())
+            addition()
+            queue.splice(-1,1)
+            // queue.push(displayValue2)
+            console.log(queue)
+            operators = "new"
+            return displayedNumber()
+        }
     }
     else if (operators === "-"){
-        console.log(subtraction())
-        subtraction()
-        queue.splice(-1,1)
-        console.log(queue)
-        operators = "new"
-        return displayedNumber()
+        if (queue.length === 1 || (queue.length === 2 && queue[1] === "")){
+            newdisplayValue = queue[0]
+            return displayedNumber
+        }
+        else{
+            console.log(subtraction())
+            subtraction()
+            queue.splice(-1,1)
+            console.log(queue)
+            operators = "new"
+            return displayedNumber()
+        }
     }
     else if (operators === "*"){
-        console.log(multiply())
-        multiply()
-        queue.splice(-1,1)
-        console.log(queue)
-        operators = "new"
-        return displayedNumber()
+        if (queue.length === 1 || (queue.length === 2 && queue[1] === "")){
+            newdisplayValue = queue[0]
+            return displayedNumber
+        }
+        else{
+            console.log(multiply())
+            multiply()
+            queue.splice(-1,1)
+            console.log(queue)
+            operators = "new"
+            return displayedNumber()
+        }
     }
     else if (operators === "/"){
-        console.log(divide())
-        divide()
-        queue.splice(-1,1)
-        console.log(queue)
-        operators = "new"
-        return displayedNumber()
+        if (queue.length === 1 || (queue.length === 2 && queue[1] === "")){
+            newdisplayValue = queue[0]
+            return displayedNumber
+        }
+        else{
+            console.log(divide())
+            divide()
+            queue.splice(-1,1)
+            console.log(queue)
+            operators = "new"
+            return displayedNumber()
+        }
     }
 }
 
