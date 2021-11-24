@@ -90,8 +90,18 @@ section{
 button:active{
   transform: translateY(.5px);
 }
-.numberButtons:active, #deci:active, .operatorButtons:active{
+.numberButtons:active, #deci:active{
   transform: translateY(.5px);
   background-color: orange;
+  border: 2px solid white;
+}
+.operatorButtons:active{
+  transform: translateY(.5px);
+  background-color: rgb(87, 233, 19);
+  border: 2px solid white;
+}
+#eq:active{
+  transform: translateY(.5px);
+  background-color: rgb(19, 23, 233);
   border: 2px solid white;
 }
