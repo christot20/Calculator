@@ -75,6 +75,23 @@ button:active{
   background-color: orange;
 }
 @media screen and (max-width: 480px) {
+  #container{
+    height: 90vh;
+    width: 90vw;
+  }
+  .numberButtonsbig{
+    display: grid;
+    justify-content: center;
+    grid-template-columns:  70px 70px 70px 70px;
+    grid-template-rows: 60px 60px 60px 60px;
+    gap: 8px;
+  }
+}
+@media screen and (max-height: 600px) {
+  #container{
+    height: 90vh;
+    width: 90vw;
+  }
   .numberButtonsbig{
     display: grid;
     justify-content: center;
