@@ -1,0 +1,74 @@
+@font-face { font-family: Digital; src: url('Fonts/digital-7.ttf'); }  /*imported font */
+@font-face { font-family: DigiGraph; src: url('Fonts/01DigiGraphics.ttf'); }  /*imported font */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+section{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#container{
+  border: 2px solid black;
+  height: 85vh;
+  min-width: 400px;
+  display: grid;
+  grid-template-rows: 1fr 0fr 2fr;
+  align-items: center;
+  justify-content: center;
+}
+#displayContainer{
+  border: 2px solid blue;
+  width: 350px;
+  height: 100px;
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  flex-direction: column;
+}
+#equation, #answer{
+  padding: 10px;
+  font-family: Digital;
+  font-size: 22px;
+  font-weight: bold;
+}
+.clearing{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+}
+.clearing button{
+  border: none;
+  height: 40px;
+  width: 150px;
+  font-size: 22px;
+}
+#clear{
+  background-color: red;
+}
+#delete{
+  background-color: yellow;
+}
+.numberButtonsbig{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 75px 75px 75px 75px;
+  grid-template-rows: 65px 65px 65px 65px;
+  gap: 10px;
+}
+.numberButtonsbig button, .clearing button{
+  font-family: DigiGraph;
+}
+button:active{
+  transform: translateY(.5px);
+}
+.numberButtons:active, #deci:active{
+  transform: translateY(.5px);
+  background-color: orange;
+}

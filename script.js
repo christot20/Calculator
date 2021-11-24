@@ -34,11 +34,11 @@ const keyd = document.addEventListener('keydown', function(event) {
     }
 });
 
-displayedAnswer.textContent = ""; 
+displayedAnswer.textContent = "Enter Any Number to Begin"; 
 function displayedNumber(){
     console.log("sus")
     if (queue.length === 0){
-        displayedAnswer.textContent = ""
+        displayedAnswer.textContent = "Enter Any Number to Begin";
     }
     else if ((queue.length === 2 && displayValue2 === "") || (queue.length === 1)){
         displayedAnswer.textContent = queue[0]
@@ -46,8 +46,13 @@ function displayedNumber(){
     else{
         displayedAnswer.textContent = queue[1]
     }
-    if (queue.length === 2 && (operators !== "new" && operators !== "")){
-        displayedEq.textContent = (queue[0]+" "+operators)
+    if (queue.length >= 1 && (operators !== "new" && operators !== "")){
+        if (queue.length === 1){
+            displayedEq.textContent = (queue[0]+" "+operators)
+        }
+        else if(queue.length === 2){
+            displayedEq.textContent = (queue[0]+" "+operators+" "+queue[1])
+        }
     }
     else{
         displayedEq.textContent = ""
@@ -220,40 +225,52 @@ function ops(e){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
             operators = "+"
+            displayedNumber()
             return operators
         }
         else{
-            return operators = "+"
+            operators = "+"
+            displayedNumber()
+            return operators
         }
     }
     else if (y === "-"){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
             operators = "-"
+            displayedNumber()
             return operators
         }
         else{
-            return operators = "-"
+            operators = "-"
+            displayedNumber()
+            return operators
         }
     }
     else if (y === "*"){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
             operators = "*"
+            displayedNumber()
             return operators
         }
         else{
-            return operators = "*"
+            operators = "*"
+            displayedNumber()
+            return operators
         }
     }
     else if (y === "/"){
         if (queue.length === 2 && displayValue2 !== ""){
             operate()
             operators = "/"
+            displayedNumber()
             return operators
         }
         else{
-            return operators = "/"
+            operators = "/"
+            displayedNumber()
+            return operators
         }
     }
     else if (y === "="){

@@ -10,31 +10,33 @@
 </head>
 <body>
     <section>
-        <p id="equation"></p>
-        <p id="answer"></p>
-        <div class="clearing">
-            <button id="clear">CLEAR</button>
-            <button id="delete">DELETE</button>
-        </div>
-        <div class="numberButtonsbig">
-            <button class="numberButtons">7</button>
-            <button class="numberButtons">8</button>
-            <button class="numberButtons">9</button>
-            <button class="numberButtons">4</button>
-            <button class="numberButtons">5</button>
-            <button class="numberButtons">6</button>
-            <button class="numberButtons">3</button>
-            <button class="numberButtons">2</button>
-            <button class="numberButtons">1</button>
-            <button class="numberButtons">0</button>
-            <button id="deci">.</button>
-        </div>
-        <div class="operatorButtons">
-            <button id="div">/</button>
-            <button id="mult">*</button>
-            <button id="add">+</button>
-            <button id="sub">-</button>
-            <button id="eq">=</button>
+        <div id="container">
+            <div id="displayContainer">
+                <p id="equation"></p>
+                <p id="answer"></p>
+            </div>
+            <div class="clearing">
+                <button id="clear">CLEAR</button>
+                <button id="delete">DELETE</button>
+            </div>
+            <div class="numberButtonsbig">
+                <button class="numberButtons">7</button>
+                <button class="numberButtons">8</button>
+                <button class="numberButtons">9</button>
+                <button class="operatorButtons" id="div">/</button>
+                <button class="numberButtons">4</button>
+                <button class="numberButtons">5</button>
+                <button class="numberButtons">6</button>
+                <button class="operatorButtons" id="mult">*</button>
+                <button class="numberButtons">1</button>
+                <button class="numberButtons">2</button>
+                <button class="numberButtons">3</button>
+                <button class="operatorButtons" id="sub">-</button>
+                <button id="deci">.</button>
+                <button class="numberButtons">0</button>
+                <button class="operatorButtons" id="eq">=</button>
+                <button class="operatorButtons" id="add">+</button>
+            </div>
         </div>
     </section>
 </body>
