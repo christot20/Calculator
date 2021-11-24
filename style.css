@@ -15,7 +15,7 @@ section{
 }
 #container{
   border: 2px solid black;
-  height: 85vh;
+  height: 500px;
   min-width: 400px;
   display: grid;
   grid-template-rows: 1fr 1fr 2fr;
@@ -74,6 +74,7 @@ button:active{
   transform: translateY(.5px);
   background-color: orange;
 }
+/**
 @media screen and (max-width: 480px){
   #container{
     height: 90vh;
@@ -121,5 +122,4 @@ button:active{
     gap: 10px;
   }
 }
-
-
+**/
