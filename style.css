@@ -18,9 +18,10 @@ section{
   height: 85vh;
   min-width: 400px;
   display: grid;
-  grid-template-rows: 1fr 0fr 2fr;
+  grid-template-rows: 1fr 1fr 2fr;
   align-items: center;
   justify-content: center;
+  padding: 1em;
 }
 #displayContainer{
   border: 2px solid blue;
@@ -42,6 +43,7 @@ section{
   justify-content: center;
   align-items: center;
   gap: 1vw;
+  padding: 1em;
 }
 .clearing button{
   border: none;
@@ -71,4 +73,13 @@ button:active{
 .numberButtons:active, #deci:active{
   transform: translateY(.5px);
   background-color: orange;
+}
+@media screen and (max-width: 480px) {
+  .numberButtonsbig{
+    display: grid;
+    justify-content: center;
+    grid-template-columns:  70px 70px 70px 70px;
+    grid-template-rows: 60px 60px 60px 60px;
+    gap: 8px;
+  }
 }
